@@ -55,12 +55,12 @@ struct cpu_instr_s {
 
     // defines 2nd op of reg instruction
     when reg cpu_instr_s {
-    %op2      :cpu_reg_t;
-    }
+        %op2    : cpu_reg_t;
+    };
 
     // defines 2nd op of imm instruction
     when imm cpu_instr_s {
-    %op2      : byte;
+        %op2      : byte;
     }
 
     // defines legal opcodes for reg instr
@@ -73,7 +73,7 @@ struct cpu_instr_s {
 
     // ensures 4-bit addressing scheme
     when imm cpu_instr_s {
-    keep read_only(opcode in [JMP, JMPC, CALL]) => op2 < 16;
+        keep read_only(opcode in [JMP, JMPC, CALL]) => op2 < 16;
     };
 };
 

@@ -17,7 +17,7 @@ import cpu_instr, cpu_misc;
 import cpu_smp, cpu_dut, cpu_drive;
 
 // Add Coverage:
-//import cpu_cover;
+import cpu_cover;
 
 // Extend Coverage:
 //import cpu_cover_extend.e;

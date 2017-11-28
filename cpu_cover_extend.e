@@ -18,7 +18,7 @@ Copyright 2002-2013 (c) Cadence Design Systems, Inc.
 extend cpu_instr_s {
 
     // Extend the start_drv_DUT cover group with "is also"
-    cover start_drv_DUT is {
+    cover start_drv_DUT is also {
 
         // Add the kind field to the cover group as a new item
         item kind;

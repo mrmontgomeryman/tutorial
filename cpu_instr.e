@@ -61,7 +61,7 @@ struct cpu_instr_s {
     // defines 2nd op of imm instruction
     when imm cpu_instr_s {
         %op2      : byte;
-    }
+    };
 
     // defines legal opcodes for reg instr
     keep opcode in [ADD, SUB, AND, XOR, RET, NOP]

@@ -20,7 +20,7 @@ import cpu_smp, cpu_dut, cpu_drive;
 import cpu_cover;
 
 // Extend Coverage:
-//import cpu_cover_extend.e;
+import cpu_cover_extend.e;
 
 // Add Checking:
 //import cpu_checker;

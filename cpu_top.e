@@ -23,5 +23,5 @@ import cpu_cover;
 import cpu_cover_extend.e;
 
 // Add Checking:
-//import cpu_checker;
+import cpu_checker;
 '>

@@ -2,27 +2,27 @@
 File name   : cpu_drive.e
 Title       : Interface to DUT drive and sample
 Project     : Specman Tutorial
-Developer   : Cadence Design Systems, Inc. 
+Developer   : Cadence Design Systems, Inc.
 Created     : 12-1-2002
 Description : Specifies the interface/protocols between Specman and DUT.
-            : Specman TCMs drive instructions into the DUT.  
+            : Specman TCMs drive instructions into the DUT.
             : TCMs also sample signals and variables of the DUT.
 ---------------------------------------------------------------------------
-Copyright 2002-2013 (c) Cadence Design Systems, Inc. 
+Copyright 2002-2013 (c) Cadence Design Systems, Inc.
 -------------------------------------------------------------------------*/
 
 <'
-//import cpu_refmodel;
+import cpu_refmodel;
 
 extend sys {
     smp: signal_map_u is instance;
 
     event cpuclk is fall(smp.clk_p$)@sys.any;
-    
+
     cpu_env : cpu_env_s;
     cpu_dut : cpu_dut_s;
-    //cpu_refmodel : cpu_refmodel_s;
-    
+    cpu_refmodel : cpu_refmodel_s;
+
     connect_pointers() is also {
         cpu_env.smp = smp;
         cpu_dut.smp = smp;
@@ -34,12 +34,12 @@ extend sys {
 struct cpu_env_s {
    !smp: signal_map_u;
 
-   reset_cpu() @sys.cpuclk is {       
+   reset_cpu() @sys.cpuclk is {
       smp.rst_p$ =  0;
       wait [1] * cycle;
       smp.rst_p$ =  1;
       wait [5] * cycle;
-      //sys.cpu_refmodel.reset();		// reset reference model 
+      sys.cpu_refmodel.reset();		// reset reference model
       smp.rst_p$ =  0;
    };
 
@@ -61,15 +61,15 @@ struct cpu_env_s {
 
       wait until rise(smp.exec_p$);
 
-      // execute instr in refmodel		
-      //sys.cpu_refmodel.execute(instr, sys.cpu_dut);  
+      // execute instr in refmodel
+      sys.cpu_refmodel.execute(instr, sys.cpu_dut);
    };
 
    !next_instr : cpu_instr_s;
    num_instrs  : uint;
    keep soft num_instrs in [60..80];
 
-   gen_and_drive_instrs() @sys.cpuclk is { 
+   gen_and_drive_instrs() @sys.cpuclk is {
 
       for i from 0 to num_instrs do {
          gen next_instr;
@@ -84,7 +84,7 @@ struct cpu_env_s {
          drive_one_instr(sys.instrs[i]);
 
       };
-   }; 
+   };
 
    drive_cpu() @sys.cpuclk is {
 
